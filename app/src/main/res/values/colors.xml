@@ -12,4 +12,8 @@
     <!-- list costum color-->
     <color name="primary_soft">#205375</color>
     <color name="on_primary_soft">#EFEFEF</color>
+    <color name="primary_bold">#112B3C</color>
+    <color name="secondary_soft">#60935D</color>
+    <color name="secondary_bold">#558B6E</color>
+    <color name="on_secondary_soft">#EFEFEF</color>
 </resources>

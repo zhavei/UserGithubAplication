@@ -71,17 +71,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
         android:text="Dark Mode"
         android:textColor="@color/on_primary_soft"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
-        android:id="@+id/editText"
+    <!--<EditText
+        android:id="@+id/et_search_main"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@drawable/transparent_backgroud"
@@ -91,18 +91,39 @@
         android:hint="cari"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />-->
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_main"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/on_primary_soft"
+        android:textCursorDrawable="@null"
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:queryBackground="@null"
+        app:queryHint="cari" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_main_activity"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/guideline6"
         tools:listitem="@layout/list_item_user" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="125dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

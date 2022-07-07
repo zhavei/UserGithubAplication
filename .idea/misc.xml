@@ -3,12 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/drawable-v24/shape_background_corner.xml" value="0.2115" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/drawable/shape_background_corner_up.xml" value="0.2115" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/drawable/transparent_backgroud.xml" value="0.2115" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_splashscreen.xml" value="0.1621376811594203" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_user.xml" value="0.2" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/transparent_backgroud.xml" value="0.295" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_detail_user.xml" value="0.33" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_splashscreen.xml" value="0.33152173913043476" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/list_item_user.xml" value="0.5" />
       </map>
     </option>
   </component>
