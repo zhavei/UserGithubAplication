@@ -4,10 +4,12 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.TypedArray
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
@@ -39,36 +41,38 @@ class MainActivity : AppCompatActivity() {
 
         addListItem()
         setupRecyclerView()
-        //searchUser()
+        searchUser()
 
 
     }
 
-    /*private fun searchUser() {
-        binding.etSearchMain.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //not Use
+    //region search user
+    private fun searchUser() {
+        val countrySearch = findViewById<SearchView>(R.id.sv_main)
+        val searchIcon =
+            countrySearch.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
+        searchIcon.setColorFilter(Color.WHITE)
+
+        val cancelIcon =
+            countrySearch.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
+        cancelIcon.setColorFilter(Color.WHITE)
+
+        val textView = countrySearch.findViewById<TextView>(androidx.appcompat.R.id.search_src_text)
+        textView.setTextColor(Color.WHITE)
+
+        countrySearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
 
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
-                //not use
+            override fun onQueryTextChange(newText: String?): Boolean {
+                userAdapter.filter.filter(newText)
+                return false
             }
 
-            override fun afterTextChanged(editable: Editable) {
-                val searchKey = editable.toString()
-                users.clear()
-                for (user: User in users) {
-                    val usersList: String? = user.name?.toLowerCase()
-                    if (usersList != null) {
-                        if (usersList.contains(searchKey.toLowerCase())) {
-                            users.add(user)
-                        }
-                    }
-                }
-                userAdapter.notifyDataSetChanged()
-            }
         })
-    }*/
+    }
+    // endregion serachuser
 
     private fun setupRecyclerView() {
         binding.rvMainActivity.layoutManager = LinearLayoutManager(this)

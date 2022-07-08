@@ -2,13 +2,16 @@ package com.syafei.usergithubaplication.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ListItemUserBinding
+import java.util.*
 
 class RvMainAdapter(private val users: ArrayList<User>) :
-    RecyclerView.Adapter<AdapterViewHolder>() {
+    RecyclerView.Adapter<AdapterViewHolder>(), Filterable {
 
     private lateinit var onitemToDetails: OnitemClickCallBack
 
@@ -16,6 +19,7 @@ class RvMainAdapter(private val users: ArrayList<User>) :
 
     //region filter
     private var filterUser = ArrayList<User>()
+
     init {
         filterUser = users
     }
@@ -45,7 +49,6 @@ class RvMainAdapter(private val users: ArrayList<User>) :
                 onitemToDetails.onItemClicked(findUsers[holder.adapterPosition])
             }
 
-            //binding.tvItemName.text = filterUser[position]
         }
     }
 
@@ -56,4 +59,35 @@ class RvMainAdapter(private val users: ArrayList<User>) :
     interface OnitemClickCallBack {
         fun onItemClicked(data: User)
     }
+
+    //region filter method
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence?): FilterResults {
+                val charSearch = charSequence.toString()
+                if (charSearch.isEmpty()) {
+                    filterUser = users
+                } else {
+                    val resultList = ArrayList<User>()
+                    for (row in users) {
+                        if (row.name?.lowercase(Locale.ROOT)
+                                ?.contains(charSearch.lowercase(Locale.ROOT)) == true
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    filterUser = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = filterUser
+                return filterResults
+            }
+
+            override fun publishResults(constraints: CharSequence?, results: FilterResults?) {
+                filterUser = results?.values as ArrayList<User>
+                notifyDataSetChanged()
+            }
+        }
+    }
+    //endregion
 }
