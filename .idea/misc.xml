@@ -5,9 +5,9 @@
       <map>
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/transparent_backgroud.xml" value="0.295" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_detail_user.xml" value="0.33" />
-        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_splashscreen.xml" value="0.33152173913043476" />
-        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/list_item_user.xml" value="0.5" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/list_item_user.xml" value="0.33" />
       </map>
     </option>
   </component>

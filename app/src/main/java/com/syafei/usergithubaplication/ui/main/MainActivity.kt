@@ -42,8 +42,6 @@ class MainActivity : AppCompatActivity() {
         addListItem()
         setupRecyclerView()
         searchUser()
-
-
     }
 
     //region Search User
@@ -71,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
-    // endregion serachuser
+    // endregion Search User
 
     private fun setupRecyclerView() {
         binding.rvMainActivity.layoutManager = LinearLayoutManager(this)
@@ -128,10 +126,10 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setTitle("Github App")
-            .setMessage("beneran mau pergi?")
-            .setPositiveButton("iya",
+            .setMessage("Wanna Leave?")
+            .setPositiveButton("Yes",
                 DialogInterface.OnClickListener { dialog, which -> finish() })
-            .setNegativeButton("engga", null)
+            .setNegativeButton("No", null)
             .show()
     }
 

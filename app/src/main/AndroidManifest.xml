@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/github_splash"
+        android:icon="@drawable/icons_github"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/github_splash"
+        android:roundIcon="@drawable/icons_github"
         android:supportsRtl="true"
         android:theme="@style/Theme.UserGithubAplication">
         <activity

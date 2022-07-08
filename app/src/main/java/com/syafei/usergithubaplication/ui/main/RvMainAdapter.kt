@@ -6,6 +6,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ListItemUserBinding
 import java.util.*
@@ -14,16 +15,7 @@ class RvMainAdapter(private val users: ArrayList<User>) :
     RecyclerView.Adapter<AdapterViewHolder>(), Filterable {
 
     private lateinit var onitemToDetails: OnitemClickCallBack
-
-    //private var findUsers: ArrayList<User> = users
-
-    //region filter
     private var filterUser: ArrayList<User> = users
-
-    /*init {
-        filterUser = users
-    }*/
-    //endregion
 
     fun setOnItemClickCallBack(onitemClickCallBack: OnitemClickCallBack) {
         this.onitemToDetails = onitemClickCallBack
@@ -36,7 +28,7 @@ class RvMainAdapter(private val users: ArrayList<User>) :
     }
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-        //val listUser = findUsers[position]
+
 
         val listUser = filterUser[position]
         Glide.with(holder.itemView.context)
@@ -45,16 +37,12 @@ class RvMainAdapter(private val users: ArrayList<User>) :
 
         with(holder) {
             binding.tvItemName.text = listUser.name
-            binding.tvItemUsernames.text = "https://github.com/" + listUser.userName
-
-            /*holder.itemView.setOnClickListener {
-                onitemToDetails.onItemClicked(findUsers[holder.adapterPosition])
-            }*/
+            binding.tvItemUsernames.text =
+                holder.itemView.context.getString(R.string.path_urls) + listUser.userName
 
             holder.itemView.setOnClickListener {
                 onitemToDetails.onItemClicked(filterUser[holder.adapterPosition])
             }
-
         }
     }
 

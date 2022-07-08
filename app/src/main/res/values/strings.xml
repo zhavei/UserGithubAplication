@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Github User Application</string>
     <string name="detailpage">User Detail</string>
+    <string name="path_urls">https://github.com/</string>
 
 
     <string-array name="username">
