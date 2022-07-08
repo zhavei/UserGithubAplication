@@ -15,14 +15,14 @@ class RvMainAdapter(private val users: ArrayList<User>) :
 
     private lateinit var onitemToDetails: OnitemClickCallBack
 
-    private var findUsers: ArrayList<User> = users
+    //private var findUsers: ArrayList<User> = users
 
     //region filter
-    private var filterUser = ArrayList<User>()
+    private var filterUser: ArrayList<User> = users
 
-    init {
+    /*init {
         filterUser = users
-    }
+    }*/
     //endregion
 
     fun setOnItemClickCallBack(onitemClickCallBack: OnitemClickCallBack) {
@@ -36,7 +36,9 @@ class RvMainAdapter(private val users: ArrayList<User>) :
     }
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-        val listUser = findUsers[position]
+        //val listUser = findUsers[position]
+
+        val listUser = filterUser[position]
         Glide.with(holder.itemView.context)
             .load(listUser.avatar)
             .into(holder.binding.ivListItemProfile)
@@ -45,8 +47,12 @@ class RvMainAdapter(private val users: ArrayList<User>) :
             binding.tvItemName.text = listUser.name
             binding.tvItemUsernames.text = "https://github.com/" + listUser.userName
 
-            holder.itemView.setOnClickListener {
+            /*holder.itemView.setOnClickListener {
                 onitemToDetails.onItemClicked(findUsers[holder.adapterPosition])
+            }*/
+
+            holder.itemView.setOnClickListener {
+                onitemToDetails.onItemClicked(filterUser[holder.adapterPosition])
             }
 
         }
@@ -60,7 +66,7 @@ class RvMainAdapter(private val users: ArrayList<User>) :
         fun onItemClicked(data: User)
     }
 
-    //region filter method
+    //region filter method adapter
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {

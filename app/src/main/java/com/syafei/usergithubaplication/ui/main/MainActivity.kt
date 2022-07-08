@@ -46,19 +46,18 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //region search user
+    //region Search User
     private fun searchUser() {
-        val countrySearch = findViewById<SearchView>(R.id.sv_main)
+        val countrySearch = binding.svMain
         val searchIcon =
             countrySearch.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
-        searchIcon.setColorFilter(Color.WHITE)
-
+        searchIcon.setColorFilter(Color.BLACK)
         val cancelIcon =
             countrySearch.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
-        cancelIcon.setColorFilter(Color.WHITE)
-
-        val textView = countrySearch.findViewById<TextView>(androidx.appcompat.R.id.search_src_text)
-        textView.setTextColor(Color.WHITE)
+        cancelIcon.setColorFilter(Color.BLACK)
+        val textViewSearch =
+            countrySearch.findViewById<TextView>(androidx.appcompat.R.id.search_src_text)
+        textViewSearch.setTextColor(Color.BLACK)
 
         countrySearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
