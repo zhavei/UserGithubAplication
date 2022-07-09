@@ -9,12 +9,18 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ActivityMainBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
+import com.syafei.usergithubaplication.ui.main.darkmode.SettingDataStore
+import com.syafei.usergithubaplication.ui.main.darkmode.UIMode
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +35,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mFollowers: Array<String>
     private lateinit var mFollowing: Array<String>
 
+    private lateinit var settingDataStore: SettingDataStore
+
     private var users: ArrayList<User> = arrayListOf()
     private var userAdapter = RvMainAdapter(users)
 
@@ -38,10 +46,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         binding.rvMainActivity.setHasFixedSize(true)
+        settingDataStore = SettingDataStore(this)
 
         addListItem()
         setupRecyclerView()
         searchUser()
+
+        //region Dark Mode
+        observeUIPreferences()
+        initViewSwitch()
+        //endregion
+
     }
 
     //region Search User
@@ -70,7 +85,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
     // endregion Search User
-
     private fun setupRecyclerView() {
         binding.rvMainActivity.layoutManager = LinearLayoutManager(this)
         binding.rvMainActivity.adapter = userAdapter
@@ -91,7 +105,6 @@ class MainActivity : AppCompatActivity() {
             androidx.appcompat.R.anim.abc_fade_out
         )
     }
-
     private fun getDataLocal() {
         mAvatar = resources.obtainTypedArray(R.array.avatar)
         mName = resources.getStringArray(R.array.name)
@@ -102,7 +115,6 @@ class MainActivity : AppCompatActivity() {
         mFollowers = resources.getStringArray(R.array.followers)
         mFollowing = resources.getStringArray(R.array.following)
     }
-
     private fun addListItem(): ArrayList<User> {
         getDataLocal()
         for (position in mName.indices) {
@@ -121,6 +133,36 @@ class MainActivity : AppCompatActivity() {
         mAvatar.recycle()
         return users
     }
+
+    //region Dark Mode
+    private fun observeUIPreferences() {
+        settingDataStore.uIModeFLow.asLiveData().observe(this) { uiMode ->
+            setCheckedMode(uiMode)
+        }
+    }
+
+    private fun setCheckedMode(uiMode: UIMode?) {
+        if (uiMode == UIMode.LIGHT) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            binding.switchMain.isChecked = false
+        }
+        else if (uiMode == UIMode.DARK) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            binding.switchMain.isChecked = true
+        }
+    }
+
+    private fun initViewSwitch(){
+        binding.switchMain.setOnCheckedChangeListener{ _, isChecked ->
+            lifecycleScope.launch{
+                when(isChecked){
+                    true -> settingDataStore.setDarkMode(UIMode.DARK)
+                    false -> settingDataStore.setDarkMode(UIMode.LIGHT)
+                }
+            }
+        }
+    }
+    //endregion
 
     override fun onBackPressed() {
         AlertDialog.Builder(this)
