@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.syafei.usergithubaplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icons_github"
@@ -19,9 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity" />
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.UserGithubAplication.NoActionBar" />
+
+        <activity android:name=".ui.main.darkmode.DarkModeActivity" />
         <activity android:name=".ui.details.UserDetailActivity" />
-        <activity android:name=".ui.main.darkmode.DarkModeActivity"/>
     </application>
 
 </manifest>

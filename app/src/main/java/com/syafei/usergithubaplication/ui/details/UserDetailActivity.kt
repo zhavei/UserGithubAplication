@@ -26,11 +26,11 @@ class UserDetailActivity : AppCompatActivity() {
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        showUserDetails()
+        //showUserDetails()
 
     }
 
-    private fun showUserDetails() {
+    /*private fun showUserDetails() {
         val getUser = intent.getParcelableExtra<User>(USER) as User
         val image = getUser.avatar
         Glide.with(this).load(image).into(binding.ivDetailItemProfile)
@@ -42,7 +42,7 @@ class UserDetailActivity : AppCompatActivity() {
         binding.tvDetailRepository.text = getUser.repository.toString()
         binding.tvFollowersRepository.text = getUser.followers.toString()
         binding.tvFollowingRepository.text = getUser.following.toString()
-    }
+    }*/
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

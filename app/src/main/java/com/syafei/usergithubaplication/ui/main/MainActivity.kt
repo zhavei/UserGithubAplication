@@ -7,23 +7,16 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ActivityMainBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
 import com.syafei.usergithubaplication.ui.main.darkmode.DarkModeActivity
-import com.syafei.usergithubaplication.ui.main.darkmode.SettingDataStore
-import com.syafei.usergithubaplication.ui.main.darkmode.UIMode
-import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,8 +31,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mFollowers: Array<String>
     private lateinit var mFollowing: Array<String>
 
-    private lateinit var settingDataStore: SettingDataStore
-
     private var users: ArrayList<User> = arrayListOf()
     private var userAdapter = RvMainAdapter(users)
 
@@ -47,18 +38,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //supportActionBar?.hide()
+
         binding.rvMainActivity.setHasFixedSize(true)
-        settingDataStore = SettingDataStore(this)
 
         addListItem()
         setupRecyclerView()
         searchUser()
-
-        //region Dark Mode
-        observeUIPreferences()
-        initViewSwitch()
-        //endregion
+        setupAppBar()
 
     }
 
@@ -137,53 +123,23 @@ class MainActivity : AppCompatActivity() {
         return users
     }
 
-    //region Dark Mode
-    private fun observeUIPreferences() {
-        settingDataStore.uIModeFLow.asLiveData().observe(this) { uiMode ->
-            setCheckedMode(uiMode)
-        }
-    }
 
-    private fun setCheckedMode(uiMode: UIMode?) {
-        if (uiMode == UIMode.LIGHT) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            binding.switchMain.isChecked = false
-        }
-        else if (uiMode == UIMode.DARK) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            binding.switchMain.isChecked = true
-        }
-    }
-
-    private fun initViewSwitch(){
-        binding.switchMain.setOnCheckedChangeListener { _, isChecked ->
-            lifecycleScope.launch {
-                when (isChecked) {
-                    true -> settingDataStore.setDarkMode(UIMode.DARK)
-                    false -> settingDataStore.setDarkMode(UIMode.LIGHT)
+    private fun setupAppBar() {
+        binding.appBarMain.toolbarMain.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.favorite -> {
+                    val intentFavorite = Intent(this, DarkModeActivity::class.java)
+                    startActivity(intentFavorite)
+                    true
                 }
+                R.id.darkmode -> {
+                    val intentFavorite = Intent(this, DarkModeActivity::class.java)
+                    startActivity(intentFavorite)
+                    true
+                }
+                else -> false
             }
         }
-    }
-    //endregion
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.appbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.favorite -> {
-                val intentFavorite = Intent(this, DarkModeActivity::class.java)
-                startActivity(intentFavorite)
-            }
-            R.id.darkmode -> {
-                val intentDarkMode = Intent(this, DarkModeActivity::class.java)
-                startActivity(intentDarkMode)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
