@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,7 @@ import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ActivityMainBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
+import com.syafei.usergithubaplication.ui.main.darkmode.DarkModeActivity
 import com.syafei.usergithubaplication.ui.main.darkmode.SettingDataStore
 import com.syafei.usergithubaplication.ui.main.darkmode.UIMode
 import kotlinx.coroutines.launch
@@ -44,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
+        //supportActionBar?.hide()
         binding.rvMainActivity.setHasFixedSize(true)
         settingDataStore = SettingDataStore(this)
 
@@ -153,9 +156,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewSwitch(){
-        binding.switchMain.setOnCheckedChangeListener{ _, isChecked ->
-            lifecycleScope.launch{
-                when(isChecked){
+        binding.switchMain.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch {
+                when (isChecked) {
                     true -> settingDataStore.setDarkMode(UIMode.DARK)
                     false -> settingDataStore.setDarkMode(UIMode.LIGHT)
                 }
@@ -163,6 +166,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
     //endregion
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.appbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorite -> {
+                val intentFavorite = Intent(this, DarkModeActivity::class.java)
+                startActivity(intentFavorite)
+            }
+            R.id.darkmode -> {
+                val intentDarkMode = Intent(this, DarkModeActivity::class.java)
+                startActivity(intentDarkMode)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onBackPressed() {
         AlertDialog.Builder(this)

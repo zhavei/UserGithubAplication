@@ -9,6 +9,7 @@
         android:roundIcon="@drawable/icons_github"
         android:supportsRtl="true"
         android:theme="@style/Theme.UserGithubAplication">
+
         <activity
             android:name=".ui.onboarding.SplashScreenActivity"
             android:exported="true">
@@ -19,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.details.UserDetailActivity"/>
+        <activity android:name=".ui.details.UserDetailActivity" />
+        <activity android:name=".ui.main.darkmode.DarkModeActivity"/>
     </application>
 
 </manifest>
