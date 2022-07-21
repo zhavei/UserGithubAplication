@@ -28,22 +28,7 @@ class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-
         holder.bind(listUser[position])
-        /*val listUsers = listUser[position]
-        Glide.with(holder.itemView.context)
-            .load(listUsers.avatarUrl)
-            .into(holder.binding.ivListItemProfile)
-
-        with(holder) {
-            binding.tvItemName.text = listUsers.username
-            binding.tvItemUsernames.text =
-                holder.itemView.context.getString(R.string.path_urls) + listUsers.username
-
-            holder.itemView.setOnClickListener {
-                onItemClickCallBack?.onItemClicked(listUser[holder.adapterPosition])
-            }
-        }*/
     }
 
     override fun getItemCount(): Int = listUser.size
@@ -56,9 +41,14 @@ class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
             }
 
             binding.apply {
-                Glide.with(itemView).load(user.avatarUrl).into(ivListItemProfile)
+                Glide.with(itemView).load(user.avatarUrl)
+                    .centerCrop()
+                    .into(ivListItemProfile)
                 tvItemName.text = user.username
                 tvItemUsernames.text = user.htmlUrl
+
+                tvItemLocation.text = user.location ?: "none"
+                tvItemCompany.text = user.company ?: "none"
             }
         }
     }

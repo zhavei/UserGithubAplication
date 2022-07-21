@@ -1,43 +1,28 @@
 package com.syafei.usergithubaplication.ui.details.fragment
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.syafei.usergithubaplication.ui.details.fragment.profile.ProfileFragment
 
 class TabsPagerAdapter(
-    fragmentManager: FragmentManager,
-    lifecycle: Lifecycle,
-    private var numberOfTabs: Int
-) : FragmentStateAdapter(fragmentManager, lifecycle) {
+    private var numberOfTabs: Int,
+    activity: AppCompatActivity,
+    data: Bundle
+) : FragmentStateAdapter( activity) {
+
+    private var fragmentBundle: Bundle = data
 
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null
         when (position) {
-            0 -> {
-                val bundle = Bundle()
-                bundle.putString("fragmentName", "Profile Fragment")
-                val fragment = ProfileFragment()
-                fragment.arguments = bundle
-                return fragment
-            }
-            1 -> {
-                val bundle = Bundle()
-                bundle.putString("fragmentName", "Following Fragment")
-                val fragment = ProfileFragment()
-                fragment.arguments = bundle
-                return fragment
-            }
-            2 -> {
-                val bundle = Bundle()
-                bundle.putString("fragmentName", "Followers Fragment")
-                val fragment = ProfileFragment()
-                fragment.arguments = bundle
-                return fragment
-            }
-            else -> return fragment as Fragment
+            0 -> fragment = ProfileFragment()
+            1 -> fragment = ProfileFragment()
+            2 -> fragment = ProfileFragment()
         }
+        fragment?.arguments = this.fragmentBundle
+        return fragment as Fragment
     }
 
     override fun getItemCount(): Int {

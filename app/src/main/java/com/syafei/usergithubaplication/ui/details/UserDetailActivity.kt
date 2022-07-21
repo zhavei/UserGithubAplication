@@ -17,9 +17,6 @@ class UserDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailUserBinding
 
-    companion object {
-        const val USER = "name_"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +30,18 @@ class UserDetailActivity : AppCompatActivity() {
 
         setupTabsViewPager()
 
-        //showUserDetails()
-
     }
 
     private fun setupTabsViewPager() {
+        val userName = intent.getStringExtra(USER_NAME)
+        val userId = intent.getIntExtra(USER_ID, 0)
+        val avatarUser = intent.getStringExtra(USER_AVATAR_URL)
+        val userLink = intent.getStringExtra(USER_HTML_URL)
+
+        val bundle = Bundle()
+        bundle.putString(USER_NAME, userName)
+        bundle.putInt(USER_ID, userId)
+
         //custom color tab
         binding.tabLayout.setSelectedTabIndicatorColor(Color.RED)
         binding.tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primary_bold))
@@ -46,7 +50,11 @@ class UserDetailActivity : AppCompatActivity() {
         val numberOfTabs = 3
         binding.tabLayout.tabMode = TabLayout.MODE_FIXED
 
-        val tabsAdapter = TabsPagerAdapter(supportFragmentManager, lifecycle, numberOfTabs)
+        val tabsAdapter = TabsPagerAdapter(
+            numberOfTabs,
+            this@UserDetailActivity,
+            bundle
+        )
         binding.viewPagerDetails.adapter = tabsAdapter
         binding.viewPagerDetails.isUserInputEnabled = true    // Enable Swipe
 
@@ -71,20 +79,6 @@ class UserDetailActivity : AppCompatActivity() {
         }.attach()
     }
 
-    /*private fun showUserDetails() {
-        val getUser = intent.getParcelableExtra<User>(USER) as User
-        val image = getUser.avatar
-        Glide.with(this).load(image).into(binding.ivDetailItemProfile)
-        binding.tvDetailName.text = getUser.name.toString()
-        binding.tvDetailUsernames.text =
-            resources.getString(R.string.path_urls) + getUser.userName.toString()
-        binding.tvDetailCompany.text = getUser.company.toString()
-        binding.tvDetailLocation.text = getUser.location.toString()
-        binding.tvDetailRepository.text = getUser.repository.toString()
-        binding.tvFollowersRepository.text = getUser.followers.toString()
-        binding.tvFollowingRepository.text = getUser.following.toString()
-    }*/
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         overridePendingTransition(
@@ -100,6 +94,15 @@ class UserDetailActivity : AppCompatActivity() {
             androidx.appcompat.R.anim.abc_fade_in,
             androidx.appcompat.R.anim.abc_fade_out
         )
+    }
+
+    companion object {
+        const val USER_NAME = "_username"
+        const val USER_FOLLOWERS = "_followers"
+        const val USER_FOLLOWING = "_following"
+        const val USER_ID = "_id"
+        const val USER_AVATAR_URL = "_avatar_url"
+        const val USER_HTML_URL = "_html_url"
     }
 
 }

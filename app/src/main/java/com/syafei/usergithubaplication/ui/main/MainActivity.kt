@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ActivityMainBinding
+import com.syafei.usergithubaplication.ui.details.UserDetailActivity
 import com.syafei.usergithubaplication.ui.main.darkmode.DarkModeActivity
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel by viewModels<UserViewModel>()
-    private lateinit var userAdapter: RvMainAdapter
+    private val viewModel by viewModels<UserResultViewModel>()
+    private lateinit var userResultAdapter: RvMainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,33 +28,28 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         setupAppBar()
-
     }
 
-    //region Search User
-
-    // endregion Search User
-
     private fun setupRecyclerView() {
-        userAdapter = RvMainAdapter()
-        userAdapter.notifyDataSetChanged()
+        userResultAdapter = RvMainAdapter()
+        userResultAdapter.notifyDataSetChanged()
 
-        userAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnItemClickCallBack {
+        userResultAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnItemClickCallBack {
             override fun onItemClicked(data: User) {
-                TODO("to details activity")
-                /*val intent = Intent(this@MainActivity, UserDetailActivity::class.java)
-                intent.putExtra(UserDetailActivity.USER, data)
-                startActivity(intent)
-                overridePendingTransition(
-                    androidx.appcompat.R.anim.abc_fade_in,
-                    androidx.appcompat.R.anim.abc_fade_out
-                )*/
+                Intent(this@MainActivity, UserDetailActivity::class.java).also { intent ->
+                    intent.putExtra(UserDetailActivity.USER_ID, data.username)
+                    intent.putExtra(UserDetailActivity.USER_NAME, data.username)
+                    intent.putExtra(UserDetailActivity.USER_AVATAR_URL, data.username)
+                    intent.putExtra(UserDetailActivity.USER_HTML_URL, data.username)
+                    startActivity(intent)
+
+                }
             }
         })
 
         binding.apply {
             rvMainActivity.layoutManager = LinearLayoutManager(this@MainActivity)
-            rvMainActivity.adapter = userAdapter
+            rvMainActivity.adapter = userResultAdapter
             rvMainActivity.setHasFixedSize(true)
 
             etSearch.setOnKeyListener { view, i, keyEvent ->
@@ -68,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getSearchUser().observe(this) { view ->
             if (view != null) {
-                userAdapter.setListUser(view)
+                userResultAdapter.setListUser(view)
                 showProgressbar(false)
             }
         }

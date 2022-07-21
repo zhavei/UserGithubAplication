@@ -3,12 +3,16 @@ import com.google.gson.annotations.SerializedName
 
 data class User (
     @SerializedName("login")
-    val username : String,
+    val username: String,
     @SerializedName("avatar_url")
-    val avatarUrl : String,
+    val avatarUrl: String,
     @SerializedName("html_url")
-    val htmlUrl : String,
+    val htmlUrl: String,
     @SerializedName("id")
-    val id: Int
+    val id: Int,
+    @SerializedName("company")
+    val company: String,
+    @SerializedName("location")
+    val location: String
 
-    )
+)

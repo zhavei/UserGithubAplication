@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserViewModel : ViewModel() {
+class UserResultViewModel : ViewModel() {
 
     private val list = MutableLiveData<ArrayList<User>>()
 
