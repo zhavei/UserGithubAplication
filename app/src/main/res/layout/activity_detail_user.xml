@@ -11,9 +11,9 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/transparent_backgroud"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,23 +21,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_bold"
-        android:fillViewport="true"
-        android:fitsSystemWindows="true"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:tabGravity="fill"
 
         app:tabIndicatorAnimationMode="fade"
-        app:tabIndicatorColor="?attr/background"
+        app:tabIndicatorColor="@color/primary_soft"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/primary_soft"
-        app:tabTextColor="@color/on_primary_soft" />
+        app:tabTextColor="@color/on_primary_soft"
+        app:tabGravity="fill"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true"
+        android:backgroundTint="@color/primary_bold"
+        app:tabMaxWidth="0dp"
+        app:tabTextAppearance="?android:attr/textAppearanceMedium"
+        app:textAllCaps="false"
+
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_details"

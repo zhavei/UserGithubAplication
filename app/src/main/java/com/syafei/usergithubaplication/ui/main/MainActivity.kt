@@ -3,124 +3,104 @@ package com.syafei.usergithubaplication.ui.main
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.res.TypedArray
-import android.graphics.Color
 import android.os.Bundle
-import android.view.Menu
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.KeyEvent
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ActivityMainBinding
-import com.syafei.usergithubaplication.ui.details.UserDetailActivity
 import com.syafei.usergithubaplication.ui.main.darkmode.DarkModeActivity
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    private lateinit var mAvatar: TypedArray
-    private lateinit var mName: Array<String>
-    private lateinit var mUserName: Array<String>
-    private lateinit var mCompany: Array<String>
-    private lateinit var mLocation: Array<String>
-    private lateinit var mRepository: Array<String>
-    private lateinit var mFollowers: Array<String>
-    private lateinit var mFollowing: Array<String>
-
-    private var users: ArrayList<User> = arrayListOf()
-    private var userAdapter = RvMainAdapter(users)
+    private val viewModel by viewModels<UserViewModel>()
+    private lateinit var userAdapter: RvMainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.rvMainActivity.setHasFixedSize(true)
-
-        addListItem()
         setupRecyclerView()
-        searchUser()
         setupAppBar()
 
     }
 
     //region Search User
-    private fun searchUser() {
-        val countrySearch = binding.svMain
-        val searchIcon =
-            countrySearch.findViewById<ImageView>(androidx.appcompat.R.id.search_mag_icon)
-        searchIcon.setColorFilter(Color.BLACK)
-        val cancelIcon =
-            countrySearch.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
-        cancelIcon.setColorFilter(Color.BLACK)
-        val textViewSearch =
-            countrySearch.findViewById<TextView>(androidx.appcompat.R.id.search_src_text)
-        textViewSearch.setTextColor(Color.BLACK)
 
-        countrySearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                userAdapter.filter.filter(newText)
-                return false
-            }
-
-        })
-    }
     // endregion Search User
-    private fun setupRecyclerView() {
-        binding.rvMainActivity.layoutManager = LinearLayoutManager(this)
-        binding.rvMainActivity.adapter = userAdapter
 
-        userAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnitemClickCallBack {
+    private fun setupRecyclerView() {
+        userAdapter = RvMainAdapter()
+        userAdapter.notifyDataSetChanged()
+
+        userAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnItemClickCallBack {
             override fun onItemClicked(data: User) {
-                moveToDetails(data)
+                TODO("to details activity")
+                /*val intent = Intent(this@MainActivity, UserDetailActivity::class.java)
+                intent.putExtra(UserDetailActivity.USER, data)
+                startActivity(intent)
+                overridePendingTransition(
+                    androidx.appcompat.R.anim.abc_fade_in,
+                    androidx.appcompat.R.anim.abc_fade_out
+                )*/
             }
         })
+
+        binding.apply {
+            rvMainActivity.layoutManager = LinearLayoutManager(this@MainActivity)
+            rvMainActivity.adapter = userAdapter
+            rvMainActivity.setHasFixedSize(true)
+
+            etSearch.setOnKeyListener { view, i, keyEvent ->
+                if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                    findUser()
+                    return@setOnKeyListener true
+                }
+                return@setOnKeyListener false
+            }
+
+        }
+
+        viewModel.getSearchUser().observe(this) { view ->
+            if (view != null) {
+                userAdapter.setListUser(view)
+                showProgressbar(false)
+            }
+        }
     }
 
-    private fun moveToDetails(data: User) {
-        val intent = Intent(this@MainActivity, UserDetailActivity::class.java)
-        intent.putExtra(UserDetailActivity.USER, data)
-        startActivity(intent)
-        overridePendingTransition(
-            androidx.appcompat.R.anim.abc_fade_in,
-            androidx.appcompat.R.anim.abc_fade_out
-        )
-    }
-    private fun getDataLocal() {
-        mAvatar = resources.obtainTypedArray(R.array.avatar)
-        mName = resources.getStringArray(R.array.name)
-        mUserName = resources.getStringArray(R.array.username)
-        mCompany = resources.getStringArray(R.array.company)
-        mLocation = resources.getStringArray(R.array.location)
-        mRepository = resources.getStringArray(R.array.repository)
-        mFollowers = resources.getStringArray(R.array.followers)
-        mFollowing = resources.getStringArray(R.array.following)
-    }
-    private fun addListItem(): ArrayList<User> {
-        getDataLocal()
-        for (position in mName.indices) {
-            val userListy = User(
-                mAvatar.getResourceId(position, -1),
-                mName[position],
-                mUserName[position],
-                mCompany[position],
-                mLocation[position],
-                mRepository[position],
-                mFollowers[position],
-                mFollowing[position]
-            )
-            users.add(userListy)
+    private fun findUser() {
+        binding.apply {
+            val query = etSearch.text.toString()
+            if (query.isEmpty()) {
+                notFound(true)
+                return
+            }
+            notFound(false)
+            showProgressbar(true)
+            viewModel.searchUsers(query)
         }
-        mAvatar.recycle()
-        return users
+    }
+
+    private fun showProgressbar(progres: Boolean) {
+        if (progres) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun notFound(state: Boolean) {
+        if (state) {
+            binding.tvNotfound.visibility = View.VISIBLE
+        } else {
+            binding.tvNotfound.visibility = View.GONE
+        }
     }
 
 

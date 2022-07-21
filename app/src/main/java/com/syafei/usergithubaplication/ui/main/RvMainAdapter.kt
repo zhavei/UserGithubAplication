@@ -2,23 +2,23 @@ package com.syafei.usergithubaplication.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ListItemUserBinding
-import java.util.*
 
-class RvMainAdapter(private val users: ArrayList<User>) :
-    RecyclerView.Adapter<AdapterViewHolder>(), Filterable {
+class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
 
-    private lateinit var onitemToDetails: OnitemClickCallBack
-    private var filterUser: ArrayList<User> = users
+    private val listUser = ArrayList<User>()
+    fun setListUser(users: ArrayList<User>) {
+        listUser.clear()
+        listUser.addAll(users)
+        notifyDataSetChanged()
+    }
 
-    fun setOnItemClickCallBack(onitemClickCallBack: OnitemClickCallBack) {
-        this.onitemToDetails = onitemClickCallBack
+    private var onItemClickCallBack: OnItemClickCallBack? = null
+    fun setOnItemClickCallBack(onItemClickCallBack: OnItemClickCallBack) {
+        this.onItemClickCallBack = onItemClickCallBack
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
@@ -29,59 +29,41 @@ class RvMainAdapter(private val users: ArrayList<User>) :
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
 
-
-        val listUser = filterUser[position]
+        holder.bind(listUser[position])
+        /*val listUsers = listUser[position]
         Glide.with(holder.itemView.context)
-            .load(listUser.avatar)
+            .load(listUsers.avatarUrl)
             .into(holder.binding.ivListItemProfile)
 
         with(holder) {
-            binding.tvItemName.text = listUser.name
+            binding.tvItemName.text = listUsers.username
             binding.tvItemUsernames.text =
-                holder.itemView.context.getString(R.string.path_urls) + listUser.userName
+                holder.itemView.context.getString(R.string.path_urls) + listUsers.username
 
             holder.itemView.setOnClickListener {
-                onitemToDetails.onItemClicked(filterUser[holder.adapterPosition])
+                onItemClickCallBack?.onItemClicked(listUser[holder.adapterPosition])
+            }
+        }*/
+    }
+
+    override fun getItemCount(): Int = listUser.size
+
+    inner class AdapterViewHolder(private var binding: ListItemUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: User) {
+            binding.root.setOnClickListener {
+                onItemClickCallBack?.onItemClicked(user)
+            }
+
+            binding.apply {
+                Glide.with(itemView).load(user.avatarUrl).into(ivListItemProfile)
+                tvItemName.text = user.username
+                tvItemUsernames.text = user.htmlUrl
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return filterUser.size
-    }
-
-    interface OnitemClickCallBack {
+    interface OnItemClickCallBack {
         fun onItemClicked(data: User)
     }
-
-    //region filter method adapter
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence?): FilterResults {
-                val charSearch = charSequence.toString()
-                if (charSearch.isEmpty()) {
-                    filterUser = users
-                } else {
-                    val resultList = ArrayList<User>()
-                    for (row in users) {
-                        if (row.name?.lowercase(Locale.ROOT)
-                                ?.contains(charSearch.lowercase(Locale.ROOT)) == true
-                        ) {
-                            resultList.add(row)
-                        }
-                    }
-                    filterUser = resultList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = filterUser
-                return filterResults
-            }
-
-            override fun publishResults(constraints: CharSequence?, results: FilterResults?) {
-                filterUser = results?.values as ArrayList<User>
-                notifyDataSetChanged()
-            }
-        }
-    }
-    //endregion
 }

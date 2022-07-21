@@ -1,15 +1,14 @@
 package com.syafei.usergithubaplication.data.model
+import com.google.gson.annotations.SerializedName
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+data class User (
+    @SerializedName("login")
+    val username : String,
+    @SerializedName("avatar_url")
+    val avatarUrl : String,
+    @SerializedName("html_url")
+    val htmlUrl : String,
+    @SerializedName("id")
+    val id: Int
 
-@Parcelize
-data class User(var avatar: Int?,
-                var name: String?,
-                var userName: String?,
-                var company: String?,
-                var location: String?,
-                var repository: String?,
-                var followers: String?,
-                var following: String?,
-) : Parcelable
+    )
