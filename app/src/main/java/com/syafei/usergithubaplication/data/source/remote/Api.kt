@@ -14,11 +14,6 @@ const val API_KEY = BuildConfig.API_KEY
 
 interface Api {
 
-
-    @GET("users")
-    @Headers("Authorization: token $API_KEY")
-    fun getUsers(): Call<ArrayList<User>>
-
     @GET("search/users")
     @Headers("Authorization: token $API_KEY")
     fun getSearchUsers(

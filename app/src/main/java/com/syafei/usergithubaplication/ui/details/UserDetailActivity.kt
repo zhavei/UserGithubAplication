@@ -17,7 +17,6 @@ class UserDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailUserBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
@@ -62,15 +61,15 @@ class UserDetailActivity : AppCompatActivity() {
             when (posisition) {
                 0 -> {
                     tab.text = "Profile"
-                    tab.setIcon(R.drawable.ic_baseline_bedtime_24)
+                    tab.setIcon(R.drawable.ic_baseline_person_24)
                 }
                 1 -> {
                     tab.text = "Following"
-                    tab.setIcon(R.drawable.ic_baseline_favorite_24)
+                    tab.setIcon(R.drawable.ic_baseline_person_add_24)
                 }
                 2 -> {
                     tab.text = "Followers"
-                    tab.setIcon(R.drawable.ic_baseline_settings_24)
+                    tab.setIcon(R.drawable.ic_baseline_3p_24)
                 }
             }
             tab.icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(

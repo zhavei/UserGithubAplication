@@ -1,18 +1,18 @@
-package com.syafei.usergithubaplication.ui.main
+package com.syafei.usergithubaplication.ui.details.fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.syafei.usergithubaplication.data.model.User
-import com.syafei.usergithubaplication.databinding.ListItemUserBinding
+import com.syafei.usergithubaplication.databinding.ListItemFollowBinding
 
-class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
+class FollowsAdapter : RecyclerView.Adapter<FollowsAdapter.AdapterViewHolder>() {
 
-    private val listUser = ArrayList<User>()
-    fun setListUser(users: ArrayList<User>) {
-        listUser.clear()
-        listUser.addAll(users)
+    private val listUserFollow = ArrayList<User>()
+    fun setListFollow(users: ArrayList<User>) {
+        listUserFollow.clear()
+        listUserFollow.addAll(users)
         notifyDataSetChanged()
     }
 
@@ -23,19 +23,20 @@ class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterViewHolder {
         val binding =
-            ListItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListItemFollowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AdapterViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: AdapterViewHolder, position: Int) {
-        holder.bind(listUser[position])
+        holder.bind(listUserFollow[position])
     }
 
-    override fun getItemCount(): Int = listUser.size
+    override fun getItemCount(): Int = listUserFollow.size
 
-    inner class AdapterViewHolder(private var binding: ListItemUserBinding) :
+    inner class AdapterViewHolder(private var binding: ListItemFollowBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
+
             binding.root.setOnClickListener {
                 onItemClickCallBack?.onItemClicked(user)
             }
@@ -46,9 +47,6 @@ class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
                     .into(ivListItemProfile)
                 tvItemName.text = user.username
                 tvItemUsernames.text = user.htmlUrl
-
-               // tvItemLocation.text = user.location ?: "none"
-               // tvItemCompany.text = user.company ?: "none"
             }
         }
     }

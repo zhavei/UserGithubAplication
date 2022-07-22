@@ -10,9 +10,7 @@ data class User (
     val htmlUrl: String,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("company")
-    val company: String,
-    @SerializedName("location")
-    val location: String
+    @SerializedName("items")
+    val listSearchResult: ArrayList<User>
 
 )

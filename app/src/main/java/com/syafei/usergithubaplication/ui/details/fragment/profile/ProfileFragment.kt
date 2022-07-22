@@ -16,7 +16,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private lateinit var binding: FragmentProfileBinding
 
-    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var profileDetailViewModel: ProfileDetailViewModel
     private lateinit var detailUserResponse: DetailUserResponse
 
     override fun onCreateView(
@@ -38,17 +38,17 @@ class ProfileFragment : Fragment() {
         val userId = requireActivity().intent.getIntExtra(UserDetailActivity.USER_ID, 0)
 
         binding.apply {
-            detailViewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
-            detailViewModel.setupUserDetails(userName)
+            profileDetailViewModel = ViewModelProvider(requireActivity())[ProfileDetailViewModel::class.java]
+            profileDetailViewModel.setupUserDetails(userName)
 
-            detailViewModel.isLoading.observe(requireActivity()) { load ->
+            profileDetailViewModel.isLoading.observe(requireActivity()) { load ->
                 showProgressbar(load)
             }
-            detailViewModel.onFailure.observe(requireActivity()) { fail ->
+            profileDetailViewModel.onFailure.observe(requireActivity()) { fail ->
                 notFound(fail)
             }
 
-            detailViewModel.getDetailuser().observe(requireActivity()) { detailUserRespon ->
+            profileDetailViewModel.getDetailuser().observe(requireActivity()) { detailUserRespon ->
                 if (detailUserRespon != null) {
                     detailUserResponse = detailUserRespon
 
