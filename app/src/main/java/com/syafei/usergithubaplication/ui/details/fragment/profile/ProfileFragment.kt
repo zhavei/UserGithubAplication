@@ -57,10 +57,11 @@ class ProfileFragment : Fragment() {
 
                     binding.apply {
                         tvDetailName.text = detailUserRespon.name
-                        tvDetailUsernames.text = detailUserRespon.login
+                        tvDetailUsernames.text = detailUserRespon.htmlUrl
                         tvDetailRepository.text = detailUserRespon.publicRepos.toString()
                         tvDetailCompany.text = detailUserRespon.company ?: "none"
                         tvDetailLocation.text = detailUserRespon.location ?: "none"
+                        tvDetailBlog.text = detailUserRespon.blog ?: "none"
                         tvFollowersRepository.text = detailUserRespon.followers.toString()
                         tvFollowingRepository.text = detailUserRespon.following.toString()
 

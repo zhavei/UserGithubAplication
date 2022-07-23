@@ -16,12 +16,13 @@ data class DetailUserResponse (
     @SerializedName("html_url")
     val htmlUrl: String,
 
-    val name : String,
+    val name: String,
     val following: Int,
     val followers: Int,
-    val company : String,
+    val company: String,
+    val blog: String,
     val location: String,
 
     @SerializedName("public_repos")
-    val publicRepos : Int
+    val publicRepos: Int
 )

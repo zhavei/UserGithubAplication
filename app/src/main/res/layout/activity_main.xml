@@ -58,7 +58,7 @@
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Search User"
+            android:hint="Search User Name"
             android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/primary_bold" />
