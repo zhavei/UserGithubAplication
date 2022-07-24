@@ -64,9 +64,9 @@ class DarkModeActivity : AppCompatActivity() {
     private fun setupAppBar() {
         binding.appBarMain.toolbarMain.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.favorite -> {
-                    val intentFavorite = Intent(this, DarkModeActivity::class.java)
-                    startActivity(intentFavorite)
+                R.id.darkmode -> {
+                    val intentDark = Intent(this, DarkModeActivity::class.java)
+                    startActivity(intentDark)
                     true
                 }
                 else -> false
