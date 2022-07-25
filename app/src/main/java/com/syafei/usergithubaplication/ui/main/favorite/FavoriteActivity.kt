@@ -2,12 +2,13 @@ package com.syafei.usergithubaplication.ui.main.favorite
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
-import com.syafei.usergithubaplication.data.source.localdatabase.FavoriteUserEntity
+import com.syafei.usergithubaplication.data.source.localdatabase.UserEntity
 import com.syafei.usergithubaplication.databinding.ActivityFavoriteBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
 import com.syafei.usergithubaplication.ui.main.RvMainAdapter
@@ -41,9 +42,9 @@ class FavoriteActivity : AppCompatActivity() {
         userFavoriteAdapter.notifyDataSetChanged()
 
         userFavoriteAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnItemClickCallBack {
-            override fun onItemClicked(data: User) {
+            override fun onItemClicked(data: UserEntity) {
                 Intent(this@FavoriteActivity, UserDetailActivity::class.java).also { intent ->
-                    intent.putExtra(UserDetailActivity.USER_ID, data.username)
+                    intent.putExtra(UserDetailActivity.USER_ID, data.id)
                     intent.putExtra(UserDetailActivity.USER_NAME, data.username)
                     intent.putExtra(UserDetailActivity.USER_AVATAR_URL, data.username)
                     intent.putExtra(UserDetailActivity.USER_HTML_URL, data.username)
@@ -64,28 +65,15 @@ class FavoriteActivity : AppCompatActivity() {
         //database
         viewModel.getUserFavorite()?.observe(this) { user ->
             if (user != null) {
-                val list = maplist(user)
-                userFavoriteAdapter.setListUser(list)
+                userFavoriteAdapter.setListUser(user)
+                if (user.isEmpty()) {
+                    binding.notFoundFavorite.visibility = View.VISIBLE
+                } else {
+                    binding.notFoundFavorite.visibility = View.GONE
+                }
             }
         }
     }
-
-    //database
-    private fun maplist(users: List<FavoriteUserEntity>): ArrayList<User> {
-        val listUser = ArrayList<User>()
-        for (user in users) {
-            val mapUser = User(
-                user.username,
-                user.avatarUrl,
-                user.htmlUrl,
-                user.id,
-                user.listSearchResult
-            )
-            listUser.add(mapUser)
-        }
-        return listUser
-    }
-
 
     private fun setupAppBar() {
         binding.appBarMainFavorite.toolbarMainFavorite.setOnMenuItemClickListener { menuItem ->

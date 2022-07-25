@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.syafei.usergithubaplication.data.model.DetailUserResponse
 import com.syafei.usergithubaplication.databinding.FragmentProfileBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
@@ -40,12 +41,8 @@ class ProfileFragment : Fragment() {
         val bundle = Bundle()
         val userName =
             requireActivity().intent.getStringExtra(UserDetailActivity.USER_NAME).toString()
-
         val userId = requireActivity().intent.getIntExtra(UserDetailActivity.USER_ID, 0)
-        val avatarUrl = requireActivity().intent.getStringExtra(UserDetailActivity.USER_AVATAR_URL)
-        val htmlUrl = requireActivity().intent.getStringExtra(UserDetailActivity.USER_HTML_URL)
-        val listSearch =
-            requireActivity().intent.getStringArrayListExtra(UserDetailActivity.USER_LIST_SEARCH)
+
 
         binding.apply {
             profileDetailViewModel =
@@ -82,41 +79,43 @@ class ProfileFragment : Fragment() {
                     }
                 }
             }
+        }
 
+        binding.apply {
             //database
-            var isChecked = false
+            var isUserChecked = false
             CoroutineScope(Dispatchers.IO).launch {
                 val count = profileDetailViewModel.chekUsers(userId)
                 withContext(Dispatchers.Main) {
                     if (count != null) {
                         if (count > 0) {
                             toggleFavorite.isChecked = true
-                            isChecked = true
+                            isUserChecked = true
                         } else {
                             toggleFavorite.isChecked = false
-                            isChecked = false
+                            isUserChecked = false
                         }
                     }
                 }
             }
 
-            //database
+            //database add favorite
             toggleFavorite.setOnClickListener {
-                isChecked = !isChecked
-                if (isChecked) {
+                isUserChecked = !isUserChecked
+                if (isUserChecked) {
                     profileDetailViewModel.addToFavorite(
                         userName,
-                        avatarUrl!!,
-                        htmlUrl!!,
-                        userId,
-                        listSearch!!
+                        detailUserResponse.avatarUrl,
+                        detailUserResponse.htmlUrl,
+                        userId
                     )
+                    Snackbar.make(requireView(), "Added to Favorite", Snackbar.LENGTH_SHORT).show()
                 } else {
                     profileDetailViewModel.removeFavorite(userId)
+                    Snackbar.make(requireView(), "User Removed", Snackbar.LENGTH_SHORT).show()
                 }
-                toggleFavorite.isChecked = isChecked
+                toggleFavorite.isChecked = isUserChecked
             }
-
         }
 
     }
@@ -142,7 +141,4 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-
-    }
 }

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 
 @Database(
-    entities = [FavoriteUserEntity::class],
+    entities = [UserEntity::class],
     version = 1,
     exportSchema = false
 )

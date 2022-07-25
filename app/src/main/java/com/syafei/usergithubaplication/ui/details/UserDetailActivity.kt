@@ -32,14 +32,12 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private fun setupTabsViewPager() {
-        val userName = intent.getStringExtra(USER_NAME)
-        val userId = intent.getIntExtra(USER_ID, 0)
-        val avatarUser = intent.getStringExtra(USER_AVATAR_URL)
-        val userLink = intent.getStringExtra(USER_HTML_URL)
+        val getUserName = intent.getStringExtra(USER_NAME)
+        val getUserId = intent.getIntExtra(USER_ID, 0)
 
         val bundle = Bundle()
-        bundle.putString(USER_NAME, userName)
-        bundle.putInt(USER_ID, userId)
+        bundle.putString(USER_NAME, getUserName)
+        bundle.putInt(USER_ID, getUserId)
 
         //custom color tab
         binding.tabLayout.setSelectedTabIndicatorColor(Color.RED)

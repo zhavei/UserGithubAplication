@@ -7,9 +7,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.syafei.usergithubaplication.data.model.DetailUserResponse
-import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.data.source.localdatabase.FavoriteUserDao
-import com.syafei.usergithubaplication.data.source.localdatabase.FavoriteUserEntity
+import com.syafei.usergithubaplication.data.source.localdatabase.UserEntity
 import com.syafei.usergithubaplication.data.source.localdatabase.UserDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -69,16 +68,15 @@ class ProfileDetailViewModel(apps: Application) : AndroidViewModel(apps) {
         userName: String,
         avaUrl: String,
         htmlUrl: String,
-        id: Int,
-        listSearchUser: ArrayList<String>
+        id: Int
     ) {
         CoroutineScope(Dispatchers.IO).launch {
-            val user = FavoriteUserEntity(userName, avaUrl, htmlUrl, id, listSearchUser)
+            val user = UserEntity(userName, avaUrl, htmlUrl, id)
             userDao?.addToFavorite(user)
         }
     }
 
-    fun chekUsers(id: Int) = userDao?.CheckCountUser(id)
+    fun chekUsers(id: Int) = userDao?.checkCountUser(id)
 
     fun removeFavorite(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {

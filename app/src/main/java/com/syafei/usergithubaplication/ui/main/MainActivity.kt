@@ -10,7 +10,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.syafei.usergithubaplication.R
+import com.syafei.usergithubaplication.data.mapper.MapperDataEntities
 import com.syafei.usergithubaplication.data.model.User
+import com.syafei.usergithubaplication.data.source.localdatabase.UserEntity
 import com.syafei.usergithubaplication.databinding.ActivityMainBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
 import com.syafei.usergithubaplication.ui.main.favorite.FavoriteActivity
@@ -35,25 +37,12 @@ class MainActivity : AppCompatActivity() {
         userResultAdapter = RvMainAdapter()
         userResultAdapter.notifyDataSetChanged()
 
-        userResultAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnItemClickCallBack {
-            override fun onItemClicked(data: User) {
-                Intent(this@MainActivity, UserDetailActivity::class.java).also { intent ->
-                    intent.putExtra(UserDetailActivity.USER_ID, data.username)
-                    intent.putExtra(UserDetailActivity.USER_NAME, data.username)
-                    intent.putExtra(UserDetailActivity.USER_AVATAR_URL, data.username)
-                    intent.putExtra(UserDetailActivity.USER_HTML_URL, data.username)
-                    startActivity(intent)
-
-                }
-            }
-        })
-
         binding.apply {
             rvMainActivity.layoutManager = LinearLayoutManager(this@MainActivity)
             rvMainActivity.adapter = userResultAdapter
             rvMainActivity.setHasFixedSize(true)
 
-            etSearch.setOnKeyListener { view, i, keyEvent ->
+            etSearch.setOnKeyListener { _, i, keyEvent ->
                 if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
                     findUser()
                     return@setOnKeyListener true
@@ -65,10 +54,24 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getSearchUser().observe(this) { view ->
             if (view != null) {
-                userResultAdapter.setListUser(view)
                 showProgressbar(false)
+                userResultAdapter.setListUser(MapperDataEntities.responeToEntities(view))
+
             }
         }
+
+        userResultAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnItemClickCallBack {
+            override fun onItemClicked(data: UserEntity) {
+                Intent(this@MainActivity, UserDetailActivity::class.java).also { intent ->
+                    intent.putExtra(UserDetailActivity.USER_ID, data.username)
+                    intent.putExtra(UserDetailActivity.USER_NAME, data.username)
+                    intent.putExtra(UserDetailActivity.USER_AVATAR_URL, data.username)
+                    intent.putExtra(UserDetailActivity.USER_HTML_URL, data.username)
+                    startActivity(intent)
+
+                }
+            }
+        })
     }
 
     private fun findUser() {
