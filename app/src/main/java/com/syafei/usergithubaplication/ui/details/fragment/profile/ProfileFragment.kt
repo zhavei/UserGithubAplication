@@ -10,11 +10,15 @@ import com.bumptech.glide.Glide
 import com.syafei.usergithubaplication.data.model.DetailUserResponse
 import com.syafei.usergithubaplication.databinding.FragmentProfileBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
-    private lateinit var binding: FragmentProfileBinding
+    private val binding get() = _binding!!
 
     private lateinit var profileDetailViewModel: ProfileDetailViewModel
     private lateinit var detailUserResponse: DetailUserResponse
@@ -24,21 +28,28 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
-        binding = requireNotNull(_binding)
-        return binding.root
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showProgressbar(true)
+
         val bundle = Bundle()
         val userName =
             requireActivity().intent.getStringExtra(UserDetailActivity.USER_NAME).toString()
+
         val userId = requireActivity().intent.getIntExtra(UserDetailActivity.USER_ID, 0)
+        val avatarUrl = requireActivity().intent.getStringExtra(UserDetailActivity.USER_AVATAR_URL)
+        val htmlUrl = requireActivity().intent.getStringExtra(UserDetailActivity.USER_HTML_URL)
+        val listSearch =
+            requireActivity().intent.getStringArrayListExtra(UserDetailActivity.USER_LIST_SEARCH)
 
         binding.apply {
-            profileDetailViewModel = ViewModelProvider(requireActivity())[ProfileDetailViewModel::class.java]
+            profileDetailViewModel =
+                ViewModelProvider(requireActivity())[ProfileDetailViewModel::class.java]
             profileDetailViewModel.setupUserDetails(userName)
 
             profileDetailViewModel.isLoading.observe(requireActivity()) { load ->
@@ -52,6 +63,7 @@ class ProfileFragment : Fragment() {
                 if (detailUserRespon != null) {
                     detailUserResponse = detailUserRespon
 
+                    //send data to following followers fragmen
                     bundle.putInt(UserDetailActivity.USER_FOLLOWING, detailUserRespon.following)
                     bundle.putInt(UserDetailActivity.USER_FOLLOWERS, detailUserRespon.followers)
 
@@ -69,6 +81,40 @@ class ProfileFragment : Fragment() {
                             .centerCrop().into(ivDetailItemProfile)
                     }
                 }
+            }
+
+            //database
+            var isChecked = false
+            CoroutineScope(Dispatchers.IO).launch {
+                val count = profileDetailViewModel.chekUsers(userId)
+                withContext(Dispatchers.Main) {
+                    if (count != null) {
+                        if (count > 0) {
+                            toggleFavorite.isChecked = true
+                            isChecked = true
+                        } else {
+                            toggleFavorite.isChecked = false
+                            isChecked = false
+                        }
+                    }
+                }
+            }
+
+            //database
+            toggleFavorite.setOnClickListener {
+                isChecked = !isChecked
+                if (isChecked) {
+                    profileDetailViewModel.addToFavorite(
+                        userName,
+                        avatarUrl!!,
+                        htmlUrl!!,
+                        userId,
+                        listSearch!!
+                    )
+                } else {
+                    profileDetailViewModel.removeFavorite(userId)
+                }
+                toggleFavorite.isChecked = isChecked
             }
 
         }

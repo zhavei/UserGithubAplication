@@ -12,5 +12,4 @@ data class User (
     val id: Int,
     @SerializedName("items")
     val listSearchResult: ArrayList<User>
-
 )

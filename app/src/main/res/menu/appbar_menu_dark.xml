@@ -7,11 +7,6 @@
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="Favorite"
         app:showAsAction="always"/>
-
-    <item
-        android:id="@+id/darkmode"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Dark Mode"
-        app:showAsAction="always" />
+    
 
 </menu>

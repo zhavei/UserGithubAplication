@@ -8,6 +8,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.databinding.ActivityDarkModeBinding
+import com.syafei.usergithubaplication.ui.main.favorite.FavoriteActivity
 import kotlinx.coroutines.launch
 
 class DarkModeActivity : AppCompatActivity() {
@@ -62,11 +63,11 @@ class DarkModeActivity : AppCompatActivity() {
     //endregion
 
     private fun setupAppBar() {
-        binding.appBarMain.toolbarMain.setOnMenuItemClickListener { menuItem ->
+        binding.appBarMainDark.toolbarMainDark.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.darkmode -> {
-                    val intentDark = Intent(this, DarkModeActivity::class.java)
-                    startActivity(intentDark)
+                R.id.favorite -> {
+                    val intent = Intent(this, FavoriteActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false

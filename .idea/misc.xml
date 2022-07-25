@@ -4,25 +4,36 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_detail_user.xml" value="0.33" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_splashscreen.xml" value="0.15443840579710144" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/fragment_follow.xml" value="0.20416666666666666" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_follow.xml" value="0.20416666666666666" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_user.xml" value="0.5" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/menu/appbar_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_user.xml" value="0.15443840579710144" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable-v24/shape_background_corner.xml" value="0.179" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable-v24/shape_background_corner_black.xml" value="0.1" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/favorite_toggle.xml" value="0.1595" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.301" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.162" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.311" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_favorite_red.xml" value="0.1595" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_not_favorite.xml" value="0.1595" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_unfavorite.xml" value="0.1595" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/transparent_backgroud.xml" value="0.295" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_dark_mode.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_detail_user.xml" value="0.18" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_favorite.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/activity_splashscreen.xml" value="0.33152173913043476" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/appbar_main.xml" value="0.25" />
-        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/list_item_user.xml" value="0.5" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/appbar_main_dark.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/appbar_main_favorite.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/fragment_follow.xml" value="0.25" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/fragment_followers.xml" value="0.34103260869565216" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/fragment_following.xml" value="0.1" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/list_item_follow.xml" value="0.25" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/layout/list_item_user.xml" value="0.18" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/menu/appbar_menu.xml" value="0.33" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/menu/appbar_menu_dark.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/menu/appbar_menu_favorite.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/menu/search_menu.xml" value="0.22" />
       </map>
     </option>

@@ -7,6 +7,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.syafei.usergithubaplication.data.model.DetailUserResponse
+import com.syafei.usergithubaplication.data.model.User
+import com.syafei.usergithubaplication.data.source.localdatabase.FavoriteUserDao
+import com.syafei.usergithubaplication.data.source.localdatabase.FavoriteUserEntity
+import com.syafei.usergithubaplication.data.source.localdatabase.UserDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +27,13 @@ class ProfileDetailViewModel(apps: Application) : AndroidViewModel(apps) {
 
     private val _onFailure = MutableLiveData<Boolean>()
     val onFailure: LiveData<Boolean> = _onFailure
+
+    private var userDao: FavoriteUserDao?
+    private var userDb: UserDatabase? = UserDatabase.getDatabase(apps)
+
+    init {
+        userDao = userDb?.favoriteDao()
+    }
 
     fun setupUserDetails(name: String) {
         _onFailure.value = false
@@ -47,12 +61,33 @@ class ProfileDetailViewModel(apps: Application) : AndroidViewModel(apps) {
             })
     }
 
-    fun getDetailuser(): LiveData<DetailUserResponse>{
+    fun getDetailuser(): LiveData<DetailUserResponse> {
         return userViewModel
     }
 
+    fun addToFavorite(
+        userName: String,
+        avaUrl: String,
+        htmlUrl: String,
+        id: Int,
+        listSearchUser: ArrayList<String>
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = FavoriteUserEntity(userName, avaUrl, htmlUrl, id, listSearchUser)
+            userDao?.addToFavorite(user)
+        }
+    }
+
+    fun chekUsers(id: Int) = userDao?.CheckCountUser(id)
+
+    fun removeFavorite(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            userDao?.deleteFromFavorite(id)
+        }
+    }
+
     companion object {
-        const val TAG = "This Details View Model"
+        const val TAG = "This_Details_View_Model"
     }
 
 }

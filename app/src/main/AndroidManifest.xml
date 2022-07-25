@@ -21,13 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/Theme.UserGithubAplication.NoActionBar" />
-
         <activity android:name=".ui.main.darkmode.DarkModeActivity" />
         <activity android:name=".ui.details.UserDetailActivity" />
+        <activity android:name="com.syafei.usergithubaplication.ui.main.favorite.FavoriteActivity"/>
     </application>
 
 </manifest>

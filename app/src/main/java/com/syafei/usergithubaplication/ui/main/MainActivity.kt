@@ -13,6 +13,7 @@ import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ActivityMainBinding
 import com.syafei.usergithubaplication.ui.details.UserDetailActivity
+import com.syafei.usergithubaplication.ui.main.favorite.FavoriteActivity
 import com.syafei.usergithubaplication.ui.main.darkmode.DarkModeActivity
 
 
@@ -103,9 +104,16 @@ class MainActivity : AppCompatActivity() {
     private fun setupAppBar() {
         binding.appBarMain.toolbarMain.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.darkmode -> {
-                    val intentFavorite = Intent(this, DarkModeActivity::class.java)
+
+                R.id.favorite -> {
+                    val intentFavorite = Intent(this, FavoriteActivity::class.java)
                     startActivity(intentFavorite)
+                    true
+                }
+
+                R.id.darkmode -> {
+                    val intentDark = Intent(this, DarkModeActivity::class.java)
+                    startActivity(intentDark)
                     true
                 }
                 else -> false
