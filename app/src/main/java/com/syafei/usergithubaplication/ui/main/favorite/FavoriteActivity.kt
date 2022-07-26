@@ -32,8 +32,8 @@ class FavoriteActivity : AppCompatActivity() {
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setupAppBar()
         setupRecyclerView()
+        setupAppBar()
 
     }
 
@@ -42,7 +42,7 @@ class FavoriteActivity : AppCompatActivity() {
         userFavoriteAdapter.notifyDataSetChanged()
 
         userFavoriteAdapter.setOnItemClickCallBack(object : RvMainAdapter.OnItemClickCallBack {
-            override fun onItemClicked(data: UserEntity) {
+            override fun onItemClicked(data: User) {
                 Intent(this@FavoriteActivity, UserDetailActivity::class.java).also { intent ->
                     intent.putExtra(UserDetailActivity.USER_ID, data.id)
                     intent.putExtra(UserDetailActivity.USER_NAME, data.username)
@@ -58,21 +58,35 @@ class FavoriteActivity : AppCompatActivity() {
             rvUserFavorite.layoutManager = LinearLayoutManager(this@FavoriteActivity)
             rvUserFavorite.adapter = userFavoriteAdapter
             rvUserFavorite.setHasFixedSize(true)
-
-
         }
 
         //database
-        viewModel.getUserFavorite()?.observe(this) { user ->
-            if (user != null) {
-                userFavoriteAdapter.setListUser(user)
-                if (user.isEmpty()) {
+        viewModel.getUserFavorite()?.observe(this) {
+            if (it != null) {
+                val list = mappingList(it)
+                userFavoriteAdapter.setListUser(list)
+
+                if (list.isEmpty()) {
                     binding.notFoundFavorite.visibility = View.VISIBLE
                 } else {
                     binding.notFoundFavorite.visibility = View.GONE
                 }
             }
         }
+    }
+
+    private fun mappingList(users: List<UserEntity>): ArrayList<User> {
+        val listUser = ArrayList<User>()
+        for (user in users) {
+            val userMapped = User(
+                user.username,
+                user.avatarUrl,
+                user.htmlUrl,
+                user.id
+            )
+            listUser.add(userMapped)
+        }
+        return listUser
     }
 
     private fun setupAppBar() {

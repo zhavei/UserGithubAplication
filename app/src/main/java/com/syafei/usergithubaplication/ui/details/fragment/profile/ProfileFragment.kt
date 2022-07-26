@@ -81,18 +81,17 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        binding.apply {
-            //database
+        //database
             var isUserChecked = false
             CoroutineScope(Dispatchers.IO).launch {
                 val count = profileDetailViewModel.chekUsers(userId)
                 withContext(Dispatchers.Main) {
                     if (count != null) {
                         if (count > 0) {
-                            toggleFavorite.isChecked = true
+                            binding.toggleFavorite.isChecked = true
                             isUserChecked = true
                         } else {
-                            toggleFavorite.isChecked = false
+                            binding.toggleFavorite.isChecked = false
                             isUserChecked = false
                         }
                     }
@@ -100,23 +99,23 @@ class ProfileFragment : Fragment() {
             }
 
             //database add favorite
-            toggleFavorite.setOnClickListener {
-                isUserChecked = !isUserChecked
-                if (isUserChecked) {
-                    profileDetailViewModel.addToFavorite(
-                        userName,
-                        detailUserResponse.avatarUrl,
-                        detailUserResponse.htmlUrl,
-                        userId
-                    )
-                    Snackbar.make(requireView(), "Added to Favorite", Snackbar.LENGTH_SHORT).show()
-                } else {
+        binding.toggleFavorite.setOnClickListener {
+            isUserChecked = !isUserChecked
+            if (isUserChecked) {
+                profileDetailViewModel.addToFavorite(
+                    userName,
+                    detailUserResponse.avatarUrl,
+                    detailUserResponse.htmlUrl,
+                    userId
+                )
+                Snackbar.make(requireView(), "Added to Favorite", Snackbar.LENGTH_SHORT).show()
+            } else {
                     profileDetailViewModel.removeFavorite(userId)
                     Snackbar.make(requireView(), "User Removed", Snackbar.LENGTH_SHORT).show()
                 }
-                toggleFavorite.isChecked = isUserChecked
+            binding.toggleFavorite.isChecked = isUserChecked
             }
-        }
+
 
     }
 

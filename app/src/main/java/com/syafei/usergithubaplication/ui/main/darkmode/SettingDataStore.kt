@@ -15,13 +15,9 @@ class SettingDataStore(context: Context) {
     }
 
     private val appContext = context.applicationContext
-    private val dataStore: DataStore<Preferences>
-
-    init {
-        dataStore = appContext.createDataStore(
-            name = DATA_STORE_NAME
-        )
-    }
+    private val dataStore: DataStore<Preferences> = appContext.createDataStore(
+        name = DATA_STORE_NAME
+    )
 
     suspend fun setDarkMode(uiMode: UIMode) {
         dataStore.edit { preferences ->

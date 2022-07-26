@@ -9,7 +9,5 @@ data class User (
     @SerializedName("html_url")
     val htmlUrl: String,
     @SerializedName("id")
-    val id: Int,
-    @SerializedName("items")
-    val listSearchResult: ArrayList<User>
+    val id: Int
 )

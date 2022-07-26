@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.syafei.usergithubaplication.data.source.localdatabase.UserEntity
+import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.databinding.ListItemUserBinding
 
 class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
 
-    private val listUser = ArrayList<UserEntity>()
-    fun setListUser(users: List<UserEntity>) {
+    private val listUser = ArrayList<User>()
+    fun setListUser(users: List<User>) {
         listUser.clear()
         listUser.addAll(users)
         notifyDataSetChanged()
@@ -35,7 +35,7 @@ class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
 
     inner class AdapterViewHolder(private var binding: ListItemUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: UserEntity) {
+        fun bind(user: User) {
             binding.root.setOnClickListener {
                 onItemClickCallBack?.onItemClicked(user)
             }
@@ -51,6 +51,6 @@ class RvMainAdapter : RecyclerView.Adapter<RvMainAdapter.AdapterViewHolder>() {
     }
 
     interface OnItemClickCallBack {
-        fun onItemClicked(data: UserEntity)
+        fun onItemClicked(data: User)
     }
 }

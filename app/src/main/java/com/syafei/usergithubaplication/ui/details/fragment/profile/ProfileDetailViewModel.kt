@@ -72,6 +72,7 @@ class ProfileDetailViewModel(apps: Application) : AndroidViewModel(apps) {
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             val user = UserEntity(userName, avaUrl, htmlUrl, id)
+
             userDao?.addToFavorite(user)
         }
     }

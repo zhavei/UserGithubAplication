@@ -100,7 +100,6 @@ class UserDetailActivity : AppCompatActivity() {
         const val USER_ID = "_id"
         const val USER_AVATAR_URL = "_avatar_url"
         const val USER_HTML_URL = "_html_url"
-        const val USER_LIST_SEARCH = "_list_search"
     }
 
 }
