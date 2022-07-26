@@ -16,7 +16,7 @@ import com.syafei.usergithubaplication.ui.details.fragment.FollowsAdapter
 class FollowingFragment : Fragment() {
 
     private var _binding: FragmentFollowBinding? = null
-    private lateinit var binding: FragmentFollowBinding
+    private val binding get() = _binding!!
     private lateinit var viewModel: FollowingViewModel
     private lateinit var adapter: FollowsAdapter
     private lateinit var userName: String
@@ -26,7 +26,6 @@ class FollowingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFollowBinding.inflate(inflater, container, false)
-        binding = requireNotNull(_binding)
         return binding.root
     }
 

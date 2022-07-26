@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.syafei.usergithubaplication.data.source.localdatabase.FavoriteUserDao
-import com.syafei.usergithubaplication.data.source.localdatabase.UserEntity
 import com.syafei.usergithubaplication.data.source.localdatabase.UserDatabase
+import com.syafei.usergithubaplication.data.source.localdatabase.UserEntity
 
 class FavoriteViewModel(app: Application) : AndroidViewModel(app) {
 

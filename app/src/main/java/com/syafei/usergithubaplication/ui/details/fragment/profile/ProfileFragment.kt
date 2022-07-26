@@ -60,7 +60,7 @@ class ProfileFragment : Fragment() {
                 if (detailUserRespon != null) {
                     detailUserResponse = detailUserRespon
 
-                    //send data to following followers fragmen
+                    //send data to following followers fragment
                     bundle.putInt(UserDetailActivity.USER_FOLLOWING, detailUserRespon.following)
                     bundle.putInt(UserDetailActivity.USER_FOLLOWERS, detailUserRespon.followers)
 
@@ -68,9 +68,9 @@ class ProfileFragment : Fragment() {
                         tvDetailName.text = detailUserRespon.name
                         tvDetailUsernames.text = detailUserRespon.htmlUrl
                         tvDetailRepository.text = detailUserRespon.publicRepos.toString()
-                        tvDetailCompany.text = detailUserRespon.company ?: "none"
-                        tvDetailLocation.text = detailUserRespon.location ?: "none"
-                        tvDetailBlog.text = detailUserRespon.blog ?: "none"
+                        tvDetailCompany.text = detailUserRespon.company
+                        tvDetailLocation.text = detailUserRespon.location
+                        tvDetailBlog.text = detailUserRespon.blog
                         tvFollowersRepository.text = detailUserRespon.followers.toString()
                         tvFollowingRepository.text = detailUserRespon.following.toString()
 
@@ -81,42 +81,52 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        //database
+        //region check user on database and set toggle on off status
+        binding.apply {
+
             var isUserChecked = false
             CoroutineScope(Dispatchers.IO).launch {
-                val count = profileDetailViewModel.chekUsers(userId)
+                val chekUserOnDb = profileDetailViewModel.chekUsers(userId)
                 withContext(Dispatchers.Main) {
-                    if (count != null) {
-                        if (count > 0) {
-                            binding.toggleFavorite.isChecked = true
+                    if (chekUserOnDb != null) {
+                        if (chekUserOnDb > 0) {
+                            //set toggle on status when user exist in DB
+                            toggleFavorite.isChecked = true
                             isUserChecked = true
                         } else {
-                            binding.toggleFavorite.isChecked = false
+                            //set toggle off status when user isn't exist in DB
+                            toggleFavorite.isChecked = false
                             isUserChecked = false
                         }
                     }
                 }
             }
 
-            //database add favorite
-        binding.toggleFavorite.setOnClickListener {
-            isUserChecked = !isUserChecked
-            if (isUserChecked) {
-                profileDetailViewModel.addToFavorite(
-                    userName,
-                    detailUserResponse.avatarUrl,
-                    detailUserResponse.htmlUrl,
-                    userId
-                )
-                Snackbar.make(requireView(), "Added to Favorite", Snackbar.LENGTH_SHORT).show()
-            } else {
+            //database add to favorite
+            toggleFavorite.setOnClickListener {
+                //check if toggle is off displayed then mean toggle is - "true" status
+                isUserChecked = !isUserChecked
+
+                if (isUserChecked) {
+                    profileDetailViewModel.addToFavorite(
+                        userName,
+                        detailUserResponse.avatarUrl,
+                        detailUserResponse.htmlUrl,
+                        userId
+                    )
+                    Snackbar.make(requireView(), "Added to Favorite", Snackbar.LENGTH_SHORT).show()
+                } else {
                     profileDetailViewModel.removeFavorite(userId)
                     Snackbar.make(requireView(), "User Removed", Snackbar.LENGTH_SHORT).show()
                 }
-            binding.toggleFavorite.isChecked = isUserChecked
+                toggleFavorite.isChecked =
+                        /*set toggle to check/uncheck status :
+                        if toggle is on uncheck status then toggle is checked to true "checked toggle"
+                        and then otherwise*/
+                    isUserChecked
             }
-
-
+        }
+        //endregion
     }
 
     private fun showProgressbar(progres: Boolean) {

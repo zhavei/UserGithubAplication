@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.syafei.usergithubaplication.R
 import com.syafei.usergithubaplication.data.model.User
 import com.syafei.usergithubaplication.data.source.localdatabase.UserEntity
@@ -49,8 +50,8 @@ class FavoriteActivity : AppCompatActivity() {
                     intent.putExtra(UserDetailActivity.USER_AVATAR_URL, data.username)
                     intent.putExtra(UserDetailActivity.USER_HTML_URL, data.username)
                     startActivity(intent)
-
                 }
+
             }
         })
 

@@ -3,14 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_detail_user.xml" value="0.33" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_detail_user.xml" value="0.18" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_favorite.xml" value="0.20416666666666666" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_splashscreen.xml" value="0.15443840579710144" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/fragment_follow.xml" value="0.20416666666666666" />
-        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_follow.xml" value="0.20416666666666666" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_user.xml" value="0.5" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_user_favorite.xml" value="0.25" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/menu/appbar_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.301" />
         <entry key="..\:/Users/LenovoPC/AndroidStudioProjects/usergithubaplication/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.162" />

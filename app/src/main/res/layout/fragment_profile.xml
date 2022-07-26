@@ -40,37 +40,37 @@
         android:layout_width="175dp"
         android:layout_height="145dp"
         android:layout_marginTop="20dp"
+        android:src="@drawable/github_splash"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        android:src="@drawable/github_splash" />
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <TextView
         android:id="@+id/tv_detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:text="Username"
+        android:textAlignment="center"
         android:textColor="@color/primary_bold"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/iv_detail_item_profile"
         app:layout_constraintStart_toStartOf="@+id/iv_detail_item_profile"
-        app:layout_constraintTop_toBottomOf="@+id/iv_detail_item_profile"
-        android:text="Username" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_detail_item_profile" />
 
     <TextView
         android:id="@+id/tv_detail_usernames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="github.com/username"
+        android:textAlignment="center"
         android:textColor="@color/primary_bold"
         android:textSize="16sp"
-        android:textAlignment="center"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@+id/iv_detail_item_profile"
         app:layout_constraintStart_toStartOf="@+id/iv_detail_item_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
-        android:text="github.com/username" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_name" />
 
     <View
         android:id="@+id/line_border"
