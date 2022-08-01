@@ -1,10 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Github User Application</string>
-    <string name="detailpage">User Detail</string>
-    <string name="path_urls">https://github.com/</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="swicth_theme">Swicth Theme</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="favorite_user">Favorite User</string>
@@ -12,13 +7,10 @@
     <string name="search_user_name">Search User Name</string>
     <string name="not_found">not_found</string>
     <string name="username">Username</string>
-    <string name="github_com_username">github.com/username</string>
-    <string name="sample_number">0000</string>
     <string name="repositories">Repositories</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
     <string name="location">Location</string>
     <string name="company">Company</string>
     <string name="blog">Blog</string>
-
 </resources>

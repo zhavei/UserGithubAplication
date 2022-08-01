@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Swicth Theme"
+        android:text="@string/swicth_theme"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="10dp"
         android:layout_marginTop="16dp"
-        android:text="Dark Mode"
+        android:text="@string/dark_mode"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />

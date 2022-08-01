@@ -58,7 +58,7 @@
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Search User Name"
+            android:hint="@string/search_user_name"
             android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/primary_bold" />
@@ -80,7 +80,7 @@
         android:id="@+id/tv_notfound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="not_found"
+        android:text="@string/not_found"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

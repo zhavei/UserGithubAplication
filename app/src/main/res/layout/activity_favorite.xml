@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Favorite User"
+        android:text="@string/favorite_user"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
@@ -38,7 +38,7 @@
         android:id="@+id/not_found_favorite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Yur favorite is emppty"
+        android:text="@string/your_favorite_is_empty"
         android:textAlignment="center"
         android:textColor="@color/primary_soft"
         android:textSize="20sp"

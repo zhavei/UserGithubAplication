@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_dark_mode.xml" value="0.20416666666666666" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_detail_user.xml" value="0.18" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_favorite.xml" value="0.20416666666666666" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/activity_splashscreen.xml" value="0.15443840579710144" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/appbar_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/appbar_main_dark.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/appbar_main_favorite.xml" value="0.20416666666666666" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/fragment_follow.xml" value="0.20416666666666666" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Project latihan/UserGithubAplication/app/src/main/res/layout/list_item_follow.xml" value="0.20416666666666666" />
