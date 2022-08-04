@@ -1,5 +1,7 @@
 package com.syafei.usergithubaplication.ui.details.fragment.profile
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -127,6 +129,17 @@ class ProfileFragment : Fragment() {
             }
         }
         //endregion
+
+        // open detail user url in browser
+        binding.apply {
+            toggleWebsite.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(detailUserResponse.htmlUrl)
+                startActivity(intent)
+            }
+        }
+
+
     }
 
     private fun showProgressbar(progres: Boolean) {
